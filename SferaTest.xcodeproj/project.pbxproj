@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		6015B8A826E2048E00676FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015B8A726E2048E00676FD2 /* AppDelegate.swift */; };
 		6015B8AA26E2048E00676FD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015B8A926E2048E00676FD2 /* SceneDelegate.swift */; };
-		6015B8AC26E2048E00676FD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015B8AB26E2048E00676FD2 /* ViewController.swift */; };
+		6015B8AC26E2048E00676FD2 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015B8AB26E2048E00676FD2 /* TimerViewController.swift */; };
 		6015B8AF26E2048E00676FD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6015B8AD26E2048E00676FD2 /* Main.storyboard */; };
 		6015B8B126E2049500676FD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6015B8B026E2049500676FD2 /* Assets.xcassets */; };
 		6015B8B426E2049500676FD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6015B8B226E2049500676FD2 /* LaunchScreen.storyboard */; };
+		6015B8C426E28F8F00676FD2 /* AddTimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015B8C326E28F8F00676FD2 /* AddTimerCell.swift */; };
+		6015B8C826E2965900676FD2 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015B8C726E2965900676FD2 /* CALayerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6015B8A426E2048E00676FD2 /* SferaTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SferaTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6015B8A726E2048E00676FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6015B8A926E2048E00676FD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6015B8AB26E2048E00676FD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6015B8AB26E2048E00676FD2 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		6015B8AE26E2048E00676FD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6015B8B026E2049500676FD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6015B8B326E2049500676FD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6015B8B526E2049500676FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6015B8C326E28F8F00676FD2 /* AddTimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimerCell.swift; sourceTree = "<group>"; };
+		6015B8C726E2965900676FD2 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,81 @@
 		6015B8A626E2048E00676FD2 /* SferaTest */ = {
 			isa = PBXGroup;
 			children = (
-				6015B8A726E2048E00676FD2 /* AppDelegate.swift */,
-				6015B8A926E2048E00676FD2 /* SceneDelegate.swift */,
-				6015B8AB26E2048E00676FD2 /* ViewController.swift */,
-				6015B8AD26E2048E00676FD2 /* Main.storyboard */,
-				6015B8B026E2049500676FD2 /* Assets.xcassets */,
-				6015B8B226E2049500676FD2 /* LaunchScreen.storyboard */,
-				6015B8B526E2049500676FD2 /* Info.plist */,
+				6015B8BB26E204B300676FD2 /* Application */,
+				6015B8BF26E2050A00676FD2 /* Timer */,
 			);
 			path = SferaTest;
+			sourceTree = "<group>";
+		};
+		6015B8BB26E204B300676FD2 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8BE26E204E500676FD2 /* SupportingFiles */,
+				6015B8BD26E204D000676FD2 /* View */,
+				6015B8BC26E204C000676FD2 /* Controller */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		6015B8BC26E204C000676FD2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8A726E2048E00676FD2 /* AppDelegate.swift */,
+				6015B8A926E2048E00676FD2 /* SceneDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6015B8BD26E204D000676FD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8AD26E2048E00676FD2 /* Main.storyboard */,
+				6015B8B226E2049500676FD2 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6015B8BE26E204E500676FD2 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8B026E2049500676FD2 /* Assets.xcassets */,
+				6015B8B526E2049500676FD2 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6015B8BF26E2050A00676FD2 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8C226E2051C00676FD2 /* Model */,
+				6015B8C126E2051600676FD2 /* View */,
+				6015B8C026E2051100676FD2 /* Controller */,
+				6015B8C726E2965900676FD2 /* CALayerExtension.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		6015B8C026E2051100676FD2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8AB26E2048E00676FD2 /* TimerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6015B8C126E2051600676FD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8C326E28F8F00676FD2 /* AddTimerCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6015B8C226E2051C00676FD2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +207,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6015B8AC26E2048E00676FD2 /* ViewController.swift in Sources */,
+				6015B8AC26E2048E00676FD2 /* TimerViewController.swift in Sources */,
 				6015B8A826E2048E00676FD2 /* AppDelegate.swift in Sources */,
 				6015B8AA26E2048E00676FD2 /* SceneDelegate.swift in Sources */,
+				6015B8C826E2965900676FD2 /* CALayerExtension.swift in Sources */,
+				6015B8C426E28F8F00676FD2 /* AddTimerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +360,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLUM5QCSG5;
-				INFOPLIST_FILE = SferaTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SferaTest/Application/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +379,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLUM5QCSG5;
-				INFOPLIST_FILE = SferaTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SferaTest/Application/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
