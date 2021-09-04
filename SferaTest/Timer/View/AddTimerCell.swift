@@ -12,6 +12,8 @@ protocol AddTimerCellDelegate: AnyObject {
 }
 
 class AddTimerCell: UITableViewCell {
+    static let reuseId = "AddCell"
+    
     weak var delegate: AddTimerCellDelegate?
     
     private var textStackView: UIStackView!
