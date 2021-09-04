@@ -25,6 +25,7 @@ class TimerViewController: UIViewController {
     private func setupVC() {
         title = "Мульти таймер"
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        tableView.tableFooterView = UIView()
         setupTableView()
         self.view.addSubview(tableView)
         setupConstraintsTableView()
@@ -67,12 +68,7 @@ extension TimerViewController: UITableViewDataSource {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        default:
-            return timers.count
-        }
+        return section == 0 ? 1 : timers.count
     }
     
     
@@ -84,22 +80,20 @@ extension TimerViewController: UITableViewDataSource {
             addCell.selectionStyle = .none
             addCell.delegate = self
             return addCell
-        default:
+        case 1:
             guard let state = timers[indexPath.row].userInfo as? TimerModel else { return UITableViewCell()}
             timerCell.textLabel?.text = state.name
+            timerCell.selectionStyle = .none
             timerCell.detailTextLabel?.text = "\(ValidTimer(seconds: state.seconds).time)"
             return timerCell
+        default:
+            return UITableViewCell()
         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 200
-        default:
-            return 40
-        }
+        return indexPath.section == 0 ? 200 : 40
     }
     
     
@@ -119,7 +113,7 @@ extension TimerViewController: UITableViewDelegate {
         label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         switch section {
         case 0:
-            label.text = "\tДобавление таймеров"
+            label.text = "\tДобавление таймера"
         default:
             label.text = "\tТаймеры"
         }
@@ -128,21 +122,15 @@ extension TimerViewController: UITableViewDelegate {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-//        if isTimerPaused {
-//            timers[indexPath.row]
-//            isTimerPaused = false
-//        } else {
-//            timers[indexPath.row].invalidate()
-//            isTimerPaused = true
-//        }
-    }
 }
 
 //MARK:- AddTimerCellDelegate
 extension TimerViewController: AddTimerCellDelegate {
-    func addTimer(name: String, seconds: Int) {
+    func addTimer(name: String?, seconds: Int?) {
+        guard let name = name, let seconds = seconds else {
+            self.createAlert()
+            return
+        }
         let timerModel = TimerModel(name: name, seconds: seconds)
         let timer = Timer.scheduledTimer(timeInterval: 1.0,
                                          target: self,
@@ -164,16 +152,23 @@ extension TimerViewController {
     @objc private func updateTimer(_ timer: Timer) {
         guard let state = timer.userInfo as? TimerModel else { return }
         state.seconds -= 1
-        if state.seconds == 0 {
+        if state.seconds <= 0 {
             timer.invalidate()
             if let index = timers.firstIndex(of: timer) {
                 timers.remove(at: index)
             }
-        } else {
-            print(ValidTimer(seconds: state.seconds).time)
-            
         }
         tableView.reloadSections(IndexSet(integer: 1), with: .none)
+    }
+    
+}
+
+extension TimerViewController {
+    private func createAlert() {
+        let alertController = UIAlertController(title: "Неверные значения", message: "Введите корректные значения", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

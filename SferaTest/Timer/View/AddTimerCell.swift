@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddTimerCellDelegate: AnyObject {
-    func addTimer(name: String, seconds: Int)
+    func addTimer(name: String?, seconds: Int?)
 }
 
 class AddTimerCell: UITableViewCell {
@@ -43,6 +43,8 @@ class AddTimerCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        nameOfTimerTF.delegate = self
+        setTimerTF.delegate = self
         setupTextStackView()
         setupAddButton()
         self.contentView.addSubview(textStackView)
@@ -85,7 +87,7 @@ class AddTimerCell: UITableViewCell {
             
             self.delegate?.addTimer(name: name, seconds: seconds)
         } else {
-           print("Ошибка")
+            self.delegate?.addTimer(name: nil, seconds: nil)
         }
         
     }
@@ -133,5 +135,11 @@ extension AddTimerCell {
     }
 }
 
+extension AddTimerCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.contentView.endEditing(true)
+        return false
+    }
+}
 
 
