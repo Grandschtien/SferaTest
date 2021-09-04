@@ -43,14 +43,14 @@ class AddTimerCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        nameOfTimerTF.delegate = self
-        setTimerTF.delegate = self
-        setupTextStackView()
-        setupAddButton()
+        self.nameOfTimerTF.delegate = self
+        self.setTimerTF.delegate = self
+        self.setupTextStackView()
+        self.setupAddButton()
         self.contentView.addSubview(textStackView)
         self.contentView.addSubview(addButton)
-        setupTextStackViewConstraints()
-        setupConstraintsAddButton()
+        self.setupTextStackViewConstraints()
+        self.setupConstraintsAddButton()
     }
     
     required init?(coder: NSCoder) {
@@ -58,29 +58,29 @@ class AddTimerCell: UITableViewCell {
     }
     
     private func setupTextStackView() {
-        textStackView = UIStackView(arrangedSubviews: [nameOfTimerTF, setTimerTF])
-        textStackView.axis = .vertical
-        textStackView.spacing = 15
-        textStackView.alignment = .fill
-        textStackView.distribution = .fill
+        self.textStackView = UIStackView(arrangedSubviews: [nameOfTimerTF, setTimerTF])
+        self.textStackView.axis = .vertical
+        self.textStackView.spacing = 15
+        self.textStackView.alignment = .fill
+        self.textStackView.distribution = .fill
     }
     private func setupAddButton() {
-        addButton.addTarget(self, action: #selector(addButtonAction(sender:)), for: .touchUpInside)
+        self.addButton.addTarget(self, action: #selector(addButtonAction(sender:)), for: .touchUpInside)
         
     }
     @objc private func addButtonAction(sender: UIButton) {
         UIView.animate(withDuration: 0.2,
-                       animations: {
-                        self.addButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                       animations: {[weak self] in
+                        self?.addButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                        },
-                       completion: { _ in
+                       completion: { [weak self] _ in
                         UIView.animate(withDuration: 0.2) {
-                            self.addButton.transform = CGAffineTransform.identity
+                            self?.addButton.transform = CGAffineTransform.identity
                         }
                        })
         if let time = setTimerTF.text,
            !time.isEmpty,
-           checkValue(value: time),
+           self.checkValue(value: time),
            let seconds = Int(time),
            let name = nameOfTimerTF.text,
            !name.isEmpty {

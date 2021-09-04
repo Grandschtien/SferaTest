@@ -23,22 +23,22 @@ class TimerViewController: UIViewController {
     }
     
     private func setupVC() {
-        title = "Мульти таймер"
+        self.title = "Мульти таймер"
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        tableView.tableFooterView = UIView()
-        setupTableView()
+        self.tableView.tableFooterView = UIView()
+        self.setupTableView()
         self.view.addSubview(tableView)
-        setupConstraintsTableView()
+        self.setupConstraintsTableView()
     }
 }
 
 //MARK:- Setup Views
 extension TimerViewController {
     private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(AddTimerCell.self, forCellReuseIdentifier: AddTimerCell.reuseId)
-        tableView.register(TimerCell.self, forCellReuseIdentifier: TimerCell.reuseId)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.register(AddTimerCell.self, forCellReuseIdentifier: AddTimerCell.reuseId)
+        self.tableView.register(TimerCell.self, forCellReuseIdentifier: TimerCell.reuseId)
     }
 }
 
@@ -68,7 +68,7 @@ extension TimerViewController: UITableViewDataSource {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : timers.count
+        return section == 0 ? 1 : self.timers.count
     }
     
     
@@ -81,7 +81,7 @@ extension TimerViewController: UITableViewDataSource {
             addCell.delegate = self
             return addCell
         case 1:
-            guard let state = timers[indexPath.row].userInfo as? TimerModel else { return UITableViewCell()}
+            guard let state = self.timers[indexPath.row].userInfo as? TimerModel else { return UITableViewCell()}
             timerCell.textLabel?.text = state.name
             timerCell.selectionStyle = .none
             timerCell.detailTextLabel?.text = "\(ValidTimer(seconds: state.seconds).time)"
@@ -155,10 +155,10 @@ extension TimerViewController {
         if state.seconds <= 0 {
             timer.invalidate()
             if let index = timers.firstIndex(of: timer) {
-                timers.remove(at: index)
+                self.timers.remove(at: index)
             }
         }
-        tableView.reloadSections(IndexSet(integer: 1), with: .none)
+        self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
     }
     
 }

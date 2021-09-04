@@ -8,9 +8,9 @@
 import Foundation
 
 class TimerModel {
-     var name: String
-     var seconds: Int
-
+    var name: String
+    var seconds: Int
+    
     init(name: String, seconds: Int) {
         self.name = name
         self.seconds = seconds

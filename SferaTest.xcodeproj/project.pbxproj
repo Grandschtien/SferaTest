@@ -112,10 +112,10 @@
 		6015B8BF26E2050A00676FD2 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				6015B8D126E4025600676FD2 /* SupportingFiles */,
 				6015B8C226E2051C00676FD2 /* Model */,
 				6015B8C126E2051600676FD2 /* View */,
 				6015B8C026E2051100676FD2 /* Controller */,
-				6015B8C726E2965900676FD2 /* CALayerExtension.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -144,6 +144,14 @@
 				6015B8CF26E3BA0800676FD2 /* ValidTimer.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6015B8D126E4025600676FD2 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6015B8C726E2965900676FD2 /* CALayerExtension.swift */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

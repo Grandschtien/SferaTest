@@ -15,20 +15,20 @@ class ValidTimer {
     var time: String {
         get {
             var result = ""
-            if hours < 10 {
-                result = result +  "0" + "\(hours)" + ":"
+            if self.hours < 10 {
+                result = result +  "0" + "\(self.hours)" + ":"
             } else {
-                result = result + "\(hours)" + ":"
+                result = result + "\(self.hours)" + ":"
             }
-            if minutes < 10 {
-                result = result +  "0" + "\(minutes)" + ":"
+            if self.minutes < 10 {
+                result = result +  "0" + "\(self.minutes)" + ":"
             } else {
-                result = result + "\(minutes)" + ":"
+                result = result + "\(self.minutes)" + ":"
             }
-            if seconds < 10 {
-                result = result +  "0" + "\(seconds)"
+            if self.seconds < 10 {
+                result = result +  "0" + "\(self.seconds)"
             } else {
-                result = result + "\(seconds)"
+                result = result + "\(self.seconds)"
             }
             return result
         }
