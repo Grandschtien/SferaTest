@@ -9,6 +9,10 @@ import UIKit
 
 class TimerViewController: UIViewController {
     
+    private var timersArray = [(name: String, time: Int)]()
+    
+    private var textStackView: UIStackView!
+    
     private let staticLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = #colorLiteral(red: 0.9483085032, green: 0.9516417543, blue: 0.9616415077, alpha: 1)
@@ -18,14 +22,13 @@ class TimerViewController: UIViewController {
         return label
     }()
     
-    private var textStackView: UIStackView!
-    
     private let nameOfTimerTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Название таймера"
         textField.borderStyle = .roundedRect
         return textField
     }()
+    
     private let setTimerTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Время в секундах"
@@ -41,26 +44,22 @@ class TimerViewController: UIViewController {
         button.setTitleColor(#colorLiteral(red: 0.07163762073, green: 0.3562414179, blue: 1, alpha: 1), for: .normal)
         return button
     }()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupVC()
-    }
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .plain)
         table.sectionHeaderHeight = 40
         return table
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupVC()
+    }
+    
     private func setupVC() {
         title = "Мульти таймер"
+        
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//        self.view.addSubview(staticLabel)
-//        setupStaticLabelConstraints()
-//        setupTextStackView()
-//        self.view.addSubview(textStackView)
-//        setupTextStackViewConstraints()
-//        setupAddButton()
-//        self.view.addSubview(addButton)
-//        setupConstraintsAddButton()
         setupTableView()
         self.view.addSubview(tableView)
         setupConstraintsTableView()
@@ -109,19 +108,32 @@ extension TimerViewController {
     //TextFields
     private func setupTextStackViewConstraints() {
         self.textStackView.translatesAutoresizingMaskIntoConstraints = false
-        let verticalSpaceToStaticLabel = NSLayoutConstraint(item: self.textStackView!, attribute: .top, relatedBy: .equal, toItem: self.staticLabel, attribute: .top, multiplier: 1, constant: 60)
+        let verticalSpaceToStaticLabel = NSLayoutConstraint(item: self.textStackView!,
+                                                            attribute: .top,
+                                                            relatedBy: .equal,
+                                                            toItem: self.staticLabel,
+                                                            attribute: .top,
+                                                            multiplier: 1,
+                                                            constant: 60)
         
         NSLayoutConstraint.activate([
             verticalSpaceToStaticLabel,
             self.textStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,
                                                          constant: -100),
-            self.textStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
+            self.textStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,
+                                                        constant: 20)
         ])
     }
     //Button
     private func setupConstraintsAddButton() {
         self.addButton.translatesAutoresizingMaskIntoConstraints = false
-        let verticalSpace = NSLayoutConstraint(item: self.textStackView!, attribute: .bottom, relatedBy: .equal, toItem: self.addButton, attribute: .bottom, multiplier: 1, constant: -100)
+        let verticalSpace = NSLayoutConstraint(item: self.textStackView!,
+                                               attribute: .bottom,
+                                               relatedBy: .equal,
+                                               toItem: self.addButton,
+                                               attribute: .bottom,
+                                               multiplier: 1,
+                                               constant: -100)
         NSLayoutConstraint.activate([
             verticalSpace,
             self.addButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,
@@ -134,7 +146,6 @@ extension TimerViewController {
     //TableView
     private func setupConstraintsTableView(){
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
-       // let verticalSpace = NSLayoutConstraint(item: self.tableView, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: self.addButton, attribute: .top, multiplier: 1, constant: 30)
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
                                                 constant: 0),
@@ -170,6 +181,7 @@ extension TimerViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             addCell.selectionStyle = .none
+            addCell.delegate = self
             return addCell
         default:
             timerCell.textLabel?.text = "Timer \(indexPath.row)"
@@ -189,24 +201,35 @@ extension TimerViewController: UITableViewDataSource {
     
     
 }
-
+//MARK: TableViewDelegate
 extension TimerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0,
+                                                        width: tableView.frame.width,
+                                                        height: 40))
 
         let label = UILabel()
-        label.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+        label.frame = CGRect.init(x: 0, y: 0,
+                                  width: headerView.frame.width,
+                                  height: headerView.frame.height)
         label.backgroundColor = #colorLiteral(red: 0.9483085032, green: 0.9516417543, blue: 0.9616415077, alpha: 1)
         label.font = UIFont(name: "Futura", size: 17)
         label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         switch section {
         case 0:
-            label.text = "    Добавление таймеров"
+            label.text = "\tДобавление таймеров"
         default:
-            label.text = "    Таймеры"
+            label.text = "\tТаймеры"
         }
         label.layer.addBorder(edge: .bottom, color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), thickness: 0.5)
         headerView.addSubview(label)
         return headerView
+    }
+}
+
+//MARK:- AddTimerCellDelegate
+extension TimerViewController: AddTimerCellDelegate {
+    func addTimer(name: String, seconds: Int) {
+        print(name, seconds)
     }
 }
